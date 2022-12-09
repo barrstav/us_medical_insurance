@@ -1,0 +1,47 @@
+import csv
+
+age = []
+sex = []
+bmi = []
+children = []
+smoker = []
+region = []
+charges = []
+
+with open('insurance.csv') as csvfile:
+    data = csv.DictReader(csvfile)
+    for row in data:
+        age.append(row['age'])
+        sex.append(row['sex'])
+        bmi.append(row['bmi'])
+        children.append(row['children'])
+        smoker.append(row['smoker'])
+        region.append(row['region'])
+        charges.append(row['charges'])
+
+def count_sex(sex_data):
+    female_count = 0
+    male_count = 0
+    for sex in sex_data:
+        if sex == 'female':
+            female_count += 1
+        if sex == 'male':
+            male_count += 1
+    return ('number of females: ' + str(female_count) + ' number of males: ' + str(male_count))
+
+print(count_sex(sex))
+
+age = list(map(int, age))
+print('avergae of all sexes: ' + str(sum(age) / len(age)))
+
+female = []
+male  = []
+
+for a, b in zip(age, sex):
+    if b == 'female':
+        female.append(a)
+    if b == 'male':
+        male.append(a)
+
+print('average of female: ' + str(sum(female) / len(female)))
+print('average of male: ' + str(sum(male) / len(male)))
